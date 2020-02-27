@@ -1,5 +1,5 @@
 # What is Object Pooling?
-Object Pooling is optimization technique that focus on reusable objects instead of creating and destroying them. In this solution objects are only displayed if they are inside camera view and released after being outside.
+Object Pooling is an optimization technique that focuses on reusing objects instead of creating and destroying them. In this solution objects are only displayed if they are inside camera view and released after being outside.
 
 [More info + example](https://www.youtube.com/watch?v=tdSmKaJvCoA)
 
@@ -9,15 +9,17 @@ Object Pooling is optimization technique that focus on reusable objects instead 
 [https://www.youtube.com/watch?v=vGq9RtnU9tg](https://www.youtube.com/watch?v=vGq9RtnU9tg)
 
 ## Real life example
-In our game we have created a lot of GameObjects (trees, rocks, buildings). Even with built-in Frustum Culling there was a big drop in game performance. After investigation we figured out that Unity have problem even with empty GameObjects if they count reach hundreds of thousands. 
+In our game we have created a lot of GameObjects (trees, rocks, buildings). Even with built-in Frustum Culling there was a big drop in game performance. After some investigation we figured out that Unity has a problem even with empty GameObjects if they number in hundreds of thousands. 
 
 Object Pooling gave us **3x more FPS than before** (from 40 to 120).
 
 
 # About this repository
-This demo project shows custom implementation of Object Pooling used in our upcoming game: [Pelagos: Rise of Greece](https://www.reddit.com/r/Pelagos/).
+This demo project showcases a custom implementation of Object Pooling used in our upcoming game: 
 
-It contains working example scene and commented source code.
+[Pelagos: Rise of Greece](https://www.reddit.com/r/Pelagos/).
+
+It contains a working example scene and commented source code.
 
 
 ## Requirements
@@ -28,7 +30,7 @@ Unity 2019.3.2: go to [Unity download archive](https://unity3d.com/get-unity/dow
 Just download ZIP of this repo or use GIT client and open in Unity. That's all :)
 ## Implementation
 
-This is demonstration of solution that we're using in our project. **This is not** out of the box plugin that you can download and make working in 2 minutes.
+This is a demonstration of a solution that we're using in our project. **This is not** an out of the box plugin that you can download and make work in 2 minutes.
 Object Pooling requires specific code architecture approach that is unfortunately not taught on Unity tutorials.
 In this example we're using **Dependency Injection**. We also try to use Unity components only if necessary.
 
