@@ -2,6 +2,7 @@
 using Buildings.Domain;
 using Map.Domain;
 using Noise.Application;
+using People.Domain;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,16 +13,19 @@ namespace Map.Application
         private TerrainData _terrainData;
         private NoiseGenerator _noiseGenerator;
         private BuildingList _buildingList;
+        private PersonList _personList;
 
         public MapGenerator(
             TerrainData terrainData,
             NoiseGenerator noiseGenerator,
-            BuildingList buildingList
+            BuildingList buildingList,
+            PersonList personList
         )
         {
             _terrainData = terrainData;
             _noiseGenerator = noiseGenerator;
             _buildingList = buildingList;
+            _personList = personList;
         }
         
         public void Generate()
@@ -33,7 +37,9 @@ namespace Map.Application
             {
                 for (int y = 0; y < _terrainData.size.z; y = y + 2)
                 {
-                    if (_noiseGenerator.Generate(x, y, 320) > 0.7f)
+                    float noise = _noiseGenerator.Generate(x, y, 320);
+                    
+                    if (noise > 0.7f)
                     {
                         Building building = new Building();
                         building.Guid = Guid.NewGuid();
@@ -46,10 +52,22 @@ namespace Map.Application
                         
                         _buildingList.Buildings.Add(building);
                     }
+                    else if (noise < 0.2f)
+                    {
+                        Person person = new Person();
+                        person.Guid = Guid.NewGuid();
+                        person.Position = new Vector3(x, _terrainData.GetHeight(x, y), y);
+                        person.Position2D = new Vector2(x, y);
+                        person.Rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                        person.PersonMode = PersonMode.Idle;
+                        
+                        _personList.People.Add(person);
+                    }
                 }
             }
 
             Debug.LogFormat("There are {0} buildings on the map", _buildingList.Buildings.Count);
+            Debug.LogFormat("There are {0} people on the map", _personList.People.Count);
         }
     }
 }
