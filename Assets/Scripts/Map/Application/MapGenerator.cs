@@ -32,7 +32,8 @@ namespace Map.Application
         {
             //get all possible values in BuildingType enumerator
             BuildingType[] buildingTypes = (BuildingType[]) Enum.GetValues(typeof(BuildingType));
-
+            PersonType[] personTypes = (PersonType[]) Enum.GetValues(typeof(PersonType));
+            
             for (int x = 0; x < _terrainData.size.x; x = x + 2)
             {
                 for (int y = 0; y < _terrainData.size.z; y = y + 2)
@@ -47,8 +48,7 @@ namespace Map.Application
                         building.Position2D = new Vector2(x, y);
                         building.Rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
                         
-                        //randomization started from 1 because enum on value 0 is: BuildingType.None
-                        building.BuildingType = buildingTypes[Random.Range(1, buildingTypes.Length)];
+                        building.BuildingType = buildingTypes[Random.Range(0, buildingTypes.Length)];
                         
                         _buildingList.Buildings.Add(building);
                     }
@@ -60,6 +60,7 @@ namespace Map.Application
                         person.Position2D = new Vector2(x, y);
                         person.Rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
                         person.PersonMode = PersonMode.Idle;
+                        person.PersonType = personTypes[Random.Range(0, personTypes.Length)];
                         
                         _personList.People.Add(person);
                     }
