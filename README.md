@@ -48,4 +48,14 @@ and
 `Map.Application.MapGenerator`
 
 # Benchmark
-todo
+Buildings: 22064
+
+People: 16914
+
+|  Object Pooling ON|Object Pooling OFF  |
+|--|--|
+|  148 FPS| 30 FPS |
+
+Click on screenshot to resize
+![Object Pooling ON](https://i.imgur.com/eeLE7Du.png)
+![Object Pooling OFF](https://i.imgur.com/lKphxcR.png)
