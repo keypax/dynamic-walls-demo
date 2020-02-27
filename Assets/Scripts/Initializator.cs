@@ -5,6 +5,7 @@ using Noise.Application;
 using ObjectPooler.Application;
 using ObjectPooler.Application.Displayers;
 using UnityEngine;
+using CameraManager = CustomCamera.Application.CameraManager;
 
 public class Initializator : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Initializator : MonoBehaviour
     public ObjectPoolerManager objectPoolerManager;
     
     public Camera cameraComponent;
+    public CameraManager cameraManager;
     
     public void Awake()
     {
@@ -30,6 +32,7 @@ public class Initializator : MonoBehaviour
         
         var terrainHitter = new TerrainHitter();
 
+        cameraManager.Init(terrainHitter);
         var terrainPositionsFromCameraBoundariesGetter = new TerrainPositionsFromCameraBoundariesGetter(terrainHitter, cameraComponent);
         
         var buildingsDisplayer = new BuildingsDisplayer(objectPoolerManager, buildingList);

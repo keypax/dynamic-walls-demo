@@ -8,13 +8,11 @@ namespace ObjectPooler.Application.Displayers
     public class BuildingsDisplayer : AObjectPoolerDisplayer
     {
         private const string Prefix = "building_";
-
-        private ObjectPoolerManager _objectPoolerManager;
+        
         private BuildingList _buildingList;
         
         public BuildingsDisplayer(ObjectPoolerManager objectPoolerManager, BuildingList buildingList) : base(objectPoolerManager)
         {
-            _objectPoolerManager = objectPoolerManager;
             _buildingList = buildingList;
         }
 
@@ -31,6 +29,7 @@ namespace ObjectPooler.Application.Displayers
             {
                 if (terrainPositionsFromCameraBoundaries.IsInsidePolygon(building.Position2D))
                 {
+                    //object is not displayed yet
                     if (!building.BuildingConfigurator)
                     {
                         go = _objectPoolerManager.SpawnFromPool(
@@ -44,6 +43,7 @@ namespace ObjectPooler.Application.Displayers
                 }
                 else
                 {
+                    //hide object
                     if (building.BuildingConfigurator)
                     {
                         _objectPoolerManager.ReleaseBackToPool(Prefix + building.BuildingType, building.BuildingConfigurator.gameObject);

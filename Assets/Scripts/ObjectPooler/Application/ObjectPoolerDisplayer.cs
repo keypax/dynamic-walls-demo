@@ -8,6 +8,8 @@ namespace ObjectPooler.Application
 {
     public class ObjectPoolerDisplayer : MonoBehaviour
     {
+        public int margin = 50;
+        
         private TerrainPositionsFromCameraBoundariesGetter _terrainPositionsFromCameraBoundariesGetter;
         
         private List<AObjectPoolerDisplayer> _displayers = new List<AObjectPoolerDisplayer>();
@@ -26,7 +28,7 @@ namespace ObjectPooler.Application
 
         public void Update()
         {
-            var terrainPositions = _terrainPositionsFromCameraBoundariesGetter.Get(20);
+            var terrainPositions = _terrainPositionsFromCameraBoundariesGetter.Get(margin);
 
             int minX = Mathf.FloorToInt(terrainPositions.GetMinX());
             int maxX = Mathf.CeilToInt(terrainPositions.GetMaxX());
@@ -51,9 +53,5 @@ namespace ObjectPooler.Application
 
             _lastPositions = currentPositions;
         }
-    }
-
-    internal class CameraManager
-    {
     }
 }

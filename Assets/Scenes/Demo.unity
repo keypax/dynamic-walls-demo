@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6379f307cfab4f38a9156077f5ba39a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  margin: 50
 --- !u!4 &616414385
 Transform:
   m_ObjectHideFlags: 0
@@ -334,6 +335,7 @@ MonoBehaviour:
   objectPoolerDisplayer: {fileID: 616414384}
   objectPoolerManager: {fileID: 2106545728}
   cameraComponent: {fileID: 2013862897}
+  cameraManager: {fileID: 2013862899}
 --- !u!4 &1613050776
 Transform:
   m_ObjectHideFlags: 0
@@ -389,6 +391,7 @@ GameObject:
   - component: {fileID: 2013862898}
   - component: {fileID: 2013862897}
   - component: {fileID: 2013862896}
+  - component: {fileID: 2013862899}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -455,12 +458,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2013862895}
   m_LocalRotation: {x: 0.3865661, y: -0, z: -0, w: 0.9222618}
-  m_LocalPosition: {x: 313.8, y: 16.86, z: 341.4}
+  m_LocalPosition: {x: 500, y: 28.11, z: 500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 45.482002, y: 0, z: 0}
+--- !u!114 &2013862899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013862895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6a7e8208a04baa9638b7defd3dd72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 30
+  movementShiftMultiplier: 3
+  rotationSpeed: 100
 --- !u!1 &2106545727
 GameObject:
   m_ObjectHideFlags: 0
