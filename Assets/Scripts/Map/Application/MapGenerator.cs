@@ -28,10 +28,10 @@ namespace Map.Application
         {
             //get all possible values in BuildingType enumerator
             BuildingType[] buildingTypes = (BuildingType[]) Enum.GetValues(typeof(BuildingType));
-            
-            for (int x = 0; x < _terrainData.size.x; x++)
+
+            for (int x = 0; x < _terrainData.size.x; x = x + 2)
             {
-                for (int y = 0; y < _terrainData.size.z; y++)
+                for (int y = 0; y < _terrainData.size.z; y = y + 2)
                 {
                     if (_noiseGenerator.Generate(x, y, 320) > 0.7f)
                     {
@@ -48,6 +48,8 @@ namespace Map.Application
                     }
                 }
             }
+
+            Debug.LogFormat("There are {0} buildings on the map", _buildingList.Buildings.Count);
         }
     }
 }
