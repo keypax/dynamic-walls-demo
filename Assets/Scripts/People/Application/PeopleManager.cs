@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace People.Application
 {
+    /**
+     * Loops on all the people and decide what they should do.
+     * If in idle state: move to other position.
+     * If in walking mode: move to destination
+     */
     public class PeopleManager : MonoBehaviour
     {
         private PersonList _personList;

@@ -2,6 +2,10 @@
 
 namespace Noise.Application
 {
+    /**
+     * Generate noise for X & Y positions of the matrix.
+     * You need to set width and height of the matrix.
+     */
     public class NoiseGenerator
     {
         private int _width;

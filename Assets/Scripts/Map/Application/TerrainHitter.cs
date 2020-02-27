@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Map.Application
 {
+    /**
+     * Sends Ray and checks if one of the collisions was Terrain
+     * Info: good practice is to check collider tag, not it's name ;)
+     */
     public class TerrainHitter
     {
         public Vector3 Hit(Ray ray)

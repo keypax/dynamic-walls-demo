@@ -5,6 +5,13 @@ using UnityEngine;
 
 namespace ObjectPooler.Application.Displayers
 {
+    /**
+     * Display buildings within camera visibility
+     *
+     * Buildings are static (not moveable) so there's no point to run this code if camera is on the same position as in last frame
+     *
+     * Adding component "BuildingObjectPoolingComponent" to "Building" object inform script that building is already displayed.
+     */
     public class BuildingsDisplayer : AObjectPoolerDisplayer
     {
         private const string Prefix = "building_";

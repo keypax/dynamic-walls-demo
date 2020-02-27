@@ -3,6 +3,9 @@ using Buildings.Domain;
 
 namespace Map.Domain
 {
+    /**
+     * List of all buildings on the map
+     */
     public class BuildingList
     {
         public List<Building> Buildings { get; }
