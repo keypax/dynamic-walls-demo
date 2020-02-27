@@ -6,6 +6,11 @@ using UnityEngine.Profiling;
 
 namespace ObjectPooler.Application
 {
+    /**
+     * This class runs other Displayers (BuldingDisplayer & PeopleDisplayer)
+     * Thanks to this solution we only send Rays once per frame.
+     * There is also simple cache, that do not run non-dynamic Displayer if camera stands still.
+     */
     public class ObjectPoolerDisplayer : MonoBehaviour
     {
         public int margin = 50;

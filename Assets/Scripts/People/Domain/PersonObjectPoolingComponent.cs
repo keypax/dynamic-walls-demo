@@ -2,6 +2,10 @@
 
 namespace People.Domain
 {
+    /**
+     * If person is displayed, check if GameObject position or rotation are the same as in Person object.
+     * If not, update position/rotation
+     */
     public class PersonObjectPoolingComponent : MonoBehaviour
     {
         private Person _person;

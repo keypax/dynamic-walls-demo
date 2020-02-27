@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace CustomCamera.Domain
 {
+    /**
+     * Here are data collected from CustomCamera.Application.TerrainPositionsFromCameraBoundariesGetter
+     * In IsInsidePolygon() we're checking if object is in camera view
+     */
     public class TerrainPositionsFromCameraBoundaries
     {
         private float _minX;

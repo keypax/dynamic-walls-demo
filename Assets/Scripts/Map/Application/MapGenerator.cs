@@ -8,6 +8,12 @@ using Random = UnityEngine.Random;
 
 namespace Map.Application
 {
+    /**
+     * This class generates map.
+     * Perlin Noise is used to determine if we should spawn building, person or nothing at all.
+     * After creating building/person we add it to list that contains all the buildings/people on the map
+     * Info: In perfect world creating building/person should be done in BuildingSpawner/PersonSpawner class
+     */
     public class MapGenerator
     {
         private TerrainData _terrainData;
@@ -42,6 +48,7 @@ namespace Map.Application
                     
                     if (noise > 0.7f)
                     {
+                        //generate building
                         Building building = new Building();
                         building.Guid = Guid.NewGuid();
                         building.Position = new Vector3(x, _terrainData.GetHeight(x, y), y);
@@ -54,6 +61,7 @@ namespace Map.Application
                     }
                     else if (noise < 0.2f)
                     {
+                        //generate person
                         Person person = new Person();
                         person.Guid = Guid.NewGuid();
                         person.Position = new Vector3(x, _terrainData.GetHeight(x, y), y);

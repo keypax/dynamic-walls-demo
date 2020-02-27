@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace People.Domain
 {
+    /**
+     * Basic representation of Person
+     */
     public class Person
     {
         public Guid Guid { get; set; }

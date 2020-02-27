@@ -8,6 +8,13 @@ using People.Application;
 using UnityEngine;
 using CameraManager = CustomCamera.Application.CameraManager;
 
+/**
+ * This class is needed to make code in Dependency Injection style.
+ * https://www.youtube.com/watch?v=IKD2-MAkXyQ
+ *
+ * This is the first place called by Unity to our scripts and here we create all classes needed in other places.
+ * Here are also the references to existings components attached to GameObjects.
+ */
 public class Initializator : MonoBehaviour
 {
     public Terrain terrain;

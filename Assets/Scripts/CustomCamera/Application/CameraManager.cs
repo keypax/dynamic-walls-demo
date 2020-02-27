@@ -8,8 +8,7 @@ namespace CustomCamera.Application
         public float movementSpeed;
         public float movementShiftMultiplier;
         public float rotationSpeed;
-
-        private int _zoom = 9;
+        
         private float _currentMovementSpeed;
 
         private Camera _cameraComponent;
@@ -24,16 +23,11 @@ namespace CustomCamera.Application
         private void Awake()
         {
             _cameraComponent = GetComponent<Camera>();
-            
-            //zeby kamera byla niezalezna od reszty
-            if (_terrainHitter == null)
-            {
-                _terrainHitter = new TerrainHitter();
-            }
         }
 
         public void Update()
         {
+            //faster speed
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 _currentMovementSpeed = movementSpeed * movementShiftMultiplier;
@@ -43,6 +37,7 @@ namespace CustomCamera.Application
                 _currentMovementSpeed = movementSpeed;
             }
 
+            //movement
             if (Input.GetKey(KeyCode.W))
             {
                 Move(transform.forward);
@@ -75,6 +70,7 @@ namespace CustomCamera.Application
             }
         }
         
+        //needed for rotation
         private Vector3 HitTerrain()
         {
             Vector3 hitPoint = _terrainHitter.Hit(_cameraComponent.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2)));

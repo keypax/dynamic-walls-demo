@@ -1,11 +1,18 @@
-﻿using Buildings.Domain;
-using CustomCamera.Domain;
+﻿using CustomCamera.Domain;
 using Map.Domain;
 using People.Domain;
 using UnityEngine;
 
 namespace ObjectPooler.Application.Displayers
 {
+    /**
+     * Display people within camera visibility
+     *
+     * People are moving, so even camera stands still, we need to update people positions.
+     * Updating displayed people positions are done in "PersonObjectPoolingComponent"
+     *
+     * Adding component "PersonObjectPoolingComponent" to "Person" object inform script that person is already displayed.
+     */
     public class PeopleDisplayer : AObjectPoolerDisplayer
     {
         private const string Prefix = "person_";

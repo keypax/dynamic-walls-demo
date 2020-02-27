@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace CustomCamera.Application
 {
+    /**
+     * Shoots Rays into terrain and get Ray-Terrain contact position.
+     * Rays are shot from camera corners minus margin (this prevents sudden object disappear or show)
+     */
     public class TerrainPositionsFromCameraBoundariesGetter
     {
         private TerrainHitter _terrainHitter;
