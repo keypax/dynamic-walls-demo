@@ -11,6 +11,6 @@ namespace Buildings.Domain
         public Quaternion Rotation { get; set; }
         public BuildingType BuildingType { get; set; }
         
-        public BuildingConfigurator BuildingConfigurator { get; set; }
+        public BuildingObjectPoolingComponent BuildingObjectPoolingComponent { get; set; }
     }
 }

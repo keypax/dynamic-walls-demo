@@ -2,7 +2,7 @@
 
 namespace Buildings.Domain
 {
-    public class BuildingConfigurator : MonoBehaviour
+    public class BuildingObjectPoolingComponent : MonoBehaviour
     {
         
     }

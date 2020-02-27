@@ -1,0 +1,15 @@
+﻿using System.Collections.Generic;
+using People.Domain;
+
+namespace Map.Domain
+{
+    public class PersonList
+    {
+        public List<Person> People { get; }
+
+        public PersonList()
+        {
+            People = new List<Person>();
+        }
+    }
+}

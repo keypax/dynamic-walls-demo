@@ -30,7 +30,7 @@ namespace ObjectPooler.Application.Displayers
                 if (terrainPositionsFromCameraBoundaries.IsInsidePolygon(building.Position2D))
                 {
                     //object is not displayed yet
-                    if (!building.BuildingConfigurator)
+                    if (!building.BuildingObjectPoolingComponent)
                     {
                         go = _objectPoolerManager.SpawnFromPool(
                             Prefix + building.BuildingType,
@@ -38,17 +38,17 @@ namespace ObjectPooler.Application.Displayers
                             building.Rotation
                         );
 
-                        building.BuildingConfigurator = go.GetComponent<BuildingConfigurator>();
+                        building.BuildingObjectPoolingComponent = go.GetComponent<BuildingObjectPoolingComponent>();
                     }
                 }
                 else
                 {
                     //hide object
-                    if (building.BuildingConfigurator)
+                    if (building.BuildingObjectPoolingComponent)
                     {
-                        _objectPoolerManager.ReleaseBackToPool(Prefix + building.BuildingType, building.BuildingConfigurator.gameObject);
+                        _objectPoolerManager.ReleaseBackToPool(Prefix + building.BuildingType, building.BuildingObjectPoolingComponent.gameObject);
                         
-                        building.BuildingConfigurator = null;
+                        building.BuildingObjectPoolingComponent = null;
                     }
                 }
             }

@@ -149,6 +149,49 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &442443655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 442443657}
+  - component: {fileID: 442443656}
+  m_Layer: 0
+  m_Name: PeopleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &442443656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442443655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cde1b55b24c4cc896d295d8fde0a0d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &442443657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442443655}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &616414383
@@ -223,8 +266,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1814014487}
+  - {fileID: 2077192284}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1476223097
 GameObject:
@@ -300,7 +344,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1613050774
 GameObject:
@@ -336,6 +380,7 @@ MonoBehaviour:
   objectPoolerManager: {fileID: 2106545728}
   cameraComponent: {fileID: 2013862897}
   cameraManager: {fileID: 2013862899}
+  peopleManager: {fileID: 442443656}
 --- !u!4 &1613050776
 Transform:
   m_ObjectHideFlags: 0
@@ -462,7 +507,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 45.482002, y: 0, z: 0}
 --- !u!114 &2013862899
 MonoBehaviour:
@@ -479,6 +524,36 @@ MonoBehaviour:
   movementSpeed: 30
   movementShiftMultiplier: 3
   rotationSpeed: 100
+--- !u!1 &2077192283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2077192284}
+  m_Layer: 0
+  m_Name: People
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2077192284
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077192283}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1380682982}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2106545727
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +600,37 @@ MonoBehaviour:
     prefab: {fileID: 6832357843145977600, guid: 4597874ba7df49b43b882e26d985835a,
       type: 3}
     parent: {fileID: 1814014487}
+    size: 5
+    autoResize: 1
+  people:
+  - poolItemName: person_Type1
+    prefab: {fileID: 6832357843145977600, guid: 61750fb55db262a4b8cfd975471ab9e4,
+      type: 3}
+    parent: {fileID: 2077192284}
+    size: 5
+    autoResize: 1
+  - poolItemName: person_Type2
+    prefab: {fileID: 6832357843145977600, guid: 27497abf8ea049b41ad40681617b91ac,
+      type: 3}
+    parent: {fileID: 2077192284}
+    size: 5
+    autoResize: 1
+  - poolItemName: person_Type3
+    prefab: {fileID: 6832357843145977600, guid: 17e9791b5d05f8a469cd87bcd5efc0b8,
+      type: 3}
+    parent: {fileID: 2077192284}
+    size: 5
+    autoResize: 1
+  - poolItemName: person_Type4
+    prefab: {fileID: 6832357843145977600, guid: c13ad34c5f6b8aa4990eec2c9418548e,
+      type: 3}
+    parent: {fileID: 2077192284}
+    size: 5
+    autoResize: 1
+  - poolItemName: person_Type5
+    prefab: {fileID: 6832357843145977600, guid: 11e77d9b5c76d644a9b9eda341edcd44,
+      type: 3}
+    parent: {fileID: 2077192284}
     size: 5
     autoResize: 1
 --- !u!4 &2106545729
@@ -631,5 +737,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
