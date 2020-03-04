@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ObjectPooler.Domain;
 using UnityEngine;
 
@@ -63,46 +64,43 @@ namespace ObjectPooler.Application
          */
         public GameObject SpawnFromPool(string poolItemName, Vector3 position, Quaternion rotation)
         {
-            if (!_poolDictionary.ContainsKey(poolItemName))
+            _poolDictionary.TryGetValue(poolItemName, out Queue<GameObject> poolWithGameObjects);
+            if (poolWithGameObjects == null)
             {
                 Debug.LogWarningFormat("Poll with name: {0} doesn't exist", poolItemName);
                 return null;
             }
 
-            //there are no more free GameObjects in the pool queue
-            if (_poolDictionary[poolItemName].Count == 0)
+            try
             {
+                //get free GameObject from Pool queue of GameObjects
+                GameObject obj = poolWithGameObjects.Dequeue();
+                obj.transform.position = position;
+                obj.transform.rotation = rotation;
+                
+                return obj;
+            }
+            catch (InvalidOperationException)
+            {
+                //there are no more free GameObjects in the pool queue
                 _autoResize.TryGetValue(poolItemName, out var autoresize);
                 _objectsPoolItems.TryGetValue(poolItemName, out ObjectPoolItem objectPoolItem);
-
+                
                 if (objectPoolItem == null)
                 {
-                    Debug.LogWarningFormat("Poll with name: {0} not exists", poolItemName);
+                    Debug.LogWarningFormat("Poll with name: {0} doesn't exist", poolItemName);
                     return null;
                 }
                 
                 if (autoresize)
-                {
-                    SpawnGO(objectPoolItem.prefab, objectPoolItem.parent, _poolDictionary[poolItemName]);
+                { 
+                    SpawnGO(objectPoolItem.prefab, objectPoolItem.parent, poolWithGameObjects); 
                     return SpawnFromPool(poolItemName, position, rotation);
                 }
-                
+                    
                 Debug.LogWarningFormat("Poll with name: {0} is empty. Autoresize disabled", poolItemName);
                 return null;
             }
-            
-            //get free GameObject from Pool queue of GameObjects
-            GameObject obj = _poolDictionary[poolItemName].Dequeue();
-            if (obj == null)
-            {
-                Debug.LogWarningFormat("Poll with name: {0} returned empty GameObject!", poolItemName);
-                return null;
-            }
-            
-            obj.transform.position = position;
-            obj.transform.rotation = rotation;
-            
-            return obj;
         }
 
         //We don't need this GameObject anymore. Set it at 0,0,0 position.
