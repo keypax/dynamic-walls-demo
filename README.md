@@ -8,11 +8,6 @@ Object Pooling is an optimization technique that focuses on reusing objects inst
 
 [https://www.youtube.com/watch?v=vGq9RtnU9tg](https://www.youtube.com/watch?v=vGq9RtnU9tg)
 
-In-game example: **not included**
-![Alt Text](https://media.giphy.com/media/XaANp3NqKaF9Cf8DhA/giphy.gif)
-
-[https://www.youtube.com/watch?v=w_DCqCFAdsM](https://www.youtube.com/watch?v=w_DCqCFAdsM)
-
 ## Real life example
 In our game we have created a lot of GameObjects (trees, rocks, buildings). Even with built-in Frustum Culling there was a big drop in game performance. After some investigation we figured out that Unity has a problem even with empty GameObjects if they number in hundreds of thousands. 
 
