@@ -1,10 +1,11 @@
-﻿using CustomCamera.Application;
+﻿using Buildings.Application;
+using Buildings.Application.Spawners;
+using Buildings.Domain;
+using CustomCamera.Application;
 using Map.Application;
 using Map.Domain;
-using Noise.Application;
 using ObjectPooler.Application;
 using ObjectPooler.Application.Displayers;
-using People.Application;
 using UnityEngine;
 using CameraManager = CustomCamera.Application.CameraManager;
 
@@ -25,32 +26,57 @@ public class Initializator : MonoBehaviour
     public Camera cameraComponent;
     public CameraManager cameraManager;
 
-    public PeopleManager peopleManager;
+    public BuildingsTypesList buildingsTypesList;
     
     public void Awake()
     {
-        var noiseGenerator = new NoiseGenerator(
-            Mathf.RoundToInt(terrain.terrainData.size.x), 
-            Mathf.RoundToInt(terrain.terrainData.size.z)
-        );
-
+        //config
+        var terrainData = terrain.terrainData;
+        
+        int mapWidth = terrainData.heightmapResolution;
+        int mapHeight = terrainData.heightmapResolution;
+        
         //lists
         var buildingList = new BuildingList();
-        var personList = new PersonList();
         
-        peopleManager.Init(personList);
+        //matrices
+        var mapLayerMatrixManager = new MapLayerMatrixManager();
         
-        var mapGenerator = new MapGenerator(terrain.terrainData, noiseGenerator, buildingList, personList);
-        mapGenerator.Generate();
-        
+        var mapLayerMatrixBuildings = new MapLayerMatrix((short) mapWidth, (short) mapHeight);
+        var mapLayerMatrixBuildingsEditor = new MapLayerMatrix((short) mapWidth, (short) mapHeight);
+        var mapLayerMatrixWalls = new MapLayerMatrix((short) mapWidth, (short) mapHeight);
+
         var terrainHitter = new TerrainHitter();
         cameraManager.Init(terrainHitter);
         var terrainPositionsFromCameraBoundariesGetter = new TerrainPositionsFromCameraBoundariesGetter(terrainHitter, cameraComponent);
+
+        var wallSpawner = new WallSpawner();
+        var towerSpawner = new TowerSpawner();
+        var buildingFromSpawnerGetter = new BuildingFromSpawnerGetter(wallSpawner, towerSpawner);
         
         //displayers
         var buildingsDisplayer = new BuildingsDisplayer(objectPoolerManager, buildingList);
-        var peopleDisplayer = new PeopleDisplayer(objectPoolerManager, personList);
+        objectPoolerDisplayer.Init(terrainPositionsFromCameraBoundariesGetter, buildingsDisplayer);
         
-        objectPoolerDisplayer.Init(terrainPositionsFromCameraBoundariesGetter, buildingsDisplayer, peopleDisplayer);
+        buildingsTypesList.Init();
+        
+        var buildingAreaGetter = new BuildingAreaGetter(buildingsTypesList);
+        var buildingCollisionDetector = new BuildingCollisionDetector(
+            buildingAreaGetter,
+            mapLayerMatrixManager,
+            mapLayerMatrixBuildings
+        );
+
+        var buildingPlacer = new BuildingPlacer(
+            buildingFromSpawnerGetter,
+            terrainHitter,
+            cameraComponent,
+            buildingList,
+            buildingsDisplayer,
+            buildingCollisionDetector,
+            mapLayerMatrixManager,
+            mapLayerMatrixWalls
+        );
+        
     }
 }

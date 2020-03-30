@@ -23,14 +23,12 @@ namespace ObjectPooler.Application
 
         public void Init(
             TerrainPositionsFromCameraBoundariesGetter terrainPositionsFromCameraBoundariesGetter,
-            BuildingsDisplayer buildingsDisplayer,
-            PeopleDisplayer peopleDisplayer
+            BuildingsDisplayer buildingsDisplayer
         )
         {
             _terrainPositionsFromCameraBoundariesGetter = terrainPositionsFromCameraBoundariesGetter;
 
             _displayers.Add(buildingsDisplayer);
-            _displayers.Add(peopleDisplayer);
         }
 
         public void Update()

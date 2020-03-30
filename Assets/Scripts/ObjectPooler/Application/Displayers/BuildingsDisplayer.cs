@@ -32,33 +32,47 @@ namespace ObjectPooler.Application.Displayers
         {
             GameObject go;
 
-            foreach (Building building in _buildingList.Buildings)
+            foreach (IBuilding building in _buildingList.Buildings)
             {
                 if (terrainPositionsFromCameraBoundaries.IsInsidePolygon(building.Position2D))
                 {
                     //object is not displayed yet
-                    if (!building.BuildingObjectPoolingComponent)
+                    if (!building.BuildingConfigurator)
                     {
                         go = _objectPoolerManager.SpawnFromPool(
                             Prefix + building.BuildingType,
                             building.Position,
-                            building.Rotation
+                            Quaternion.Euler(0, building.Rotation * 90f, 0)
                         );
 
-                        building.BuildingObjectPoolingComponent = go.GetComponent<BuildingObjectPoolingComponent>();
+                        building.BuildingConfigurator = go.GetComponent<BuildingConfigurator>();
                     }
                 }
                 else
                 {
                     //hide object
-                    if (building.BuildingObjectPoolingComponent)
+                    if (building.BuildingConfigurator)
                     {
-                        _objectPoolerManager.ReleaseBackToPool(Prefix + building.BuildingType, building.BuildingObjectPoolingComponent.gameObject);
+                        _objectPoolerManager.ReleaseBackToPool(Prefix + building.BuildingType, building.BuildingConfigurator.gameObject);
                         
-                        building.BuildingObjectPoolingComponent = null;
+                        building.BuildingConfigurator = null;
                     }
                 }
             }
+        }
+        
+        public void ReleaseFromPool(IBuilding building)
+        {
+            if (building.BuildingConfigurator)
+            {
+                _objectPoolerManager.ReleaseBackToPool("building_" + building.BuildingType, building.BuildingConfigurator.gameObject);
+                building.BuildingConfigurator = null;
+            }
+            
+            /*if (building is IWall wall)
+            {
+                wall.WallConfigurator = null;
+            }*/
         }
     }
 }
