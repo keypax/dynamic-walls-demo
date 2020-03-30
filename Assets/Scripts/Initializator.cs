@@ -1,10 +1,13 @@
-﻿using CustomCamera.Application;
+﻿using Buildings.Application;
+using Buildings.Application.Spawners;
+using Buildings.Domain;
+using Buildings.Domain.Walls;
+using CustomCamera.Application;
 using Map.Application;
 using Map.Domain;
-using Noise.Application;
 using ObjectPooler.Application;
 using ObjectPooler.Application.Displayers;
-using People.Application;
+using UI.Application;
 using UnityEngine;
 using CameraManager = CustomCamera.Application.CameraManager;
 
@@ -25,32 +28,83 @@ public class Initializator : MonoBehaviour
     public Camera cameraComponent;
     public CameraManager cameraManager;
 
-    public PeopleManager peopleManager;
-    
+    public BuildingsTypesList buildingsTypesList;
+    public Canvas canvas;
+    public ViewManager viewManager;
+    public WallData wallData;
+
     public void Awake()
     {
-        var noiseGenerator = new NoiseGenerator(
-            Mathf.RoundToInt(terrain.terrainData.size.x), 
-            Mathf.RoundToInt(terrain.terrainData.size.z)
-        );
-
+        //config
+        var terrainData = terrain.terrainData;
+        
+        int mapWidth = terrainData.heightmapResolution;
+        int mapHeight = terrainData.heightmapResolution;
+        
         //lists
         var buildingList = new BuildingList();
-        var personList = new PersonList();
         
-        peopleManager.Init(personList);
+        //matrices
+        var mapLayerMatrixManager = new MapLayerMatrixManager();
         
-        var mapGenerator = new MapGenerator(terrain.terrainData, noiseGenerator, buildingList, personList);
-        mapGenerator.Generate();
-        
+        var mapLayerMatrixBuildings = new MapLayerMatrix((short) mapWidth, (short) mapHeight);
+        var mapLayerMatrixWalls = new MapLayerMatrix((short) mapWidth, (short) mapHeight);
+        var mapLayerMatrixWallsEditor = new MapLayerMatrix((short) mapWidth, (short) mapHeight);
+
         var terrainHitter = new TerrainHitter();
         cameraManager.Init(terrainHitter);
         var terrainPositionsFromCameraBoundariesGetter = new TerrainPositionsFromCameraBoundariesGetter(terrainHitter, cameraComponent);
+
+        buildingsTypesList.Init();
+        
+        var buildingAreaGetter = new BuildingAreaGetter(buildingsTypesList);
+        var buildingMapMatrixUpdater = new BuildingMapMatrixUpdater(
+            buildingAreaGetter,
+            mapLayerMatrixManager,
+            mapLayerMatrixBuildings
+        );
+        
+        var wallSpawner = new WallSpawner(
+            buildingList, 
+            buildingMapMatrixUpdater,
+            wallData, 
+            mapLayerMatrixManager, 
+            mapLayerMatrixWalls
+        );
+        
+        var towerSpawner = new TowerSpawner(buildingList, buildingMapMatrixUpdater);
+        var buildingFromSpawnerGetter = new BuildingFromSpawnerGetter(wallSpawner, towerSpawner);
+        
+        var wallSidesUpdater = new WallSidesUpdater(
+            mapLayerMatrixManager, 
+            mapLayerMatrixWallsEditor,
+            mapLayerMatrixWalls
+        );
         
         //displayers
-        var buildingsDisplayer = new BuildingsDisplayer(objectPoolerManager, buildingList);
-        var peopleDisplayer = new PeopleDisplayer(objectPoolerManager, personList);
+        var buildingsDisplayer = new BuildingsDisplayer(objectPoolerManager, buildingList, wallSidesUpdater);
+        objectPoolerDisplayer.Init(terrainPositionsFromCameraBoundariesGetter, buildingsDisplayer);
         
-        objectPoolerDisplayer.Init(terrainPositionsFromCameraBoundariesGetter, buildingsDisplayer, peopleDisplayer);
+        var buildingCollisionDetector = new BuildingCollisionDetector(
+            buildingAreaGetter,
+            mapLayerMatrixManager,
+            mapLayerMatrixBuildings
+        );
+        
+        var buildingByTypeSpawner = new BuildingByTypeSpawner(wallSpawner, towerSpawner);
+
+        var buildingPlacer = new BuildingPlacer(
+            buildingFromSpawnerGetter,
+            terrainHitter,
+            cameraComponent,
+            buildingList,
+            buildingsDisplayer,
+            buildingCollisionDetector,
+            buildingByTypeSpawner,
+            mapLayerMatrixManager,
+            mapLayerMatrixWallsEditor
+        );
+        
+        viewManager.Init(buildingsTypesList, buildingPlacer, canvas);
     }
 }

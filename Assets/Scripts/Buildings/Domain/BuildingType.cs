@@ -2,8 +2,7 @@
 {
     public enum BuildingType
     {
-        Small = 0,
-        Medium = 1,
-        Large = 2
+        Wall = 1,
+        Tower = 2
     }
 }

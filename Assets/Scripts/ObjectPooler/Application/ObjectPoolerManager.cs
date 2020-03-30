@@ -13,7 +13,6 @@ namespace ObjectPooler.Application
     {
         //this is divided by groups for more human-friendly management in the Inspector
         public List<ObjectPoolItem> buildings;
-        public List<ObjectPoolItem> people;
         
         //this is needed to run loop over grouped items
         private List<List<ObjectPoolItem>> _allObjects = new List<List<ObjectPoolItem>>();
@@ -34,7 +33,6 @@ namespace ObjectPooler.Application
         public void Start()
         {
             _allObjects.Add(buildings);
-            _allObjects.Add(people);
 
             _poolDictionary = new Dictionary<string, Queue<GameObject>>();
 

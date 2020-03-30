@@ -13,7 +13,7 @@ namespace ObjectPooler.Application
      */
     public class ObjectPoolerDisplayer : MonoBehaviour
     {
-        public int margin = 50;
+        public int margin = 100;
         
         private TerrainPositionsFromCameraBoundariesGetter _terrainPositionsFromCameraBoundariesGetter;
         
@@ -23,14 +23,12 @@ namespace ObjectPooler.Application
 
         public void Init(
             TerrainPositionsFromCameraBoundariesGetter terrainPositionsFromCameraBoundariesGetter,
-            BuildingsDisplayer buildingsDisplayer,
-            PeopleDisplayer peopleDisplayer
+            BuildingsDisplayer buildingsDisplayer
         )
         {
             _terrainPositionsFromCameraBoundariesGetter = terrainPositionsFromCameraBoundariesGetter;
 
             _displayers.Add(buildingsDisplayer);
-            _displayers.Add(peopleDisplayer);
         }
 
         public void Update()
@@ -50,7 +48,7 @@ namespace ObjectPooler.Application
                 //simple cache for static displayers
                 if (_lastPositions == currentPositions && displayer.IsDynamic() == false)
                 {
-                    continue;
+                    //continue;
                 }
 
                 Profiler.BeginSample("ObjectPoolerDisplayer_" + displayer.GetType().Name);
