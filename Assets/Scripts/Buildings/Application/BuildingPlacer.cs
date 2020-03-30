@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Buildings.Application.Spawners;
 using Buildings.Domain;
 using Map.Application;
 using Map.Domain;
@@ -21,6 +22,7 @@ namespace Buildings.Application
         private BuildingList _buildingList;
         private BuildingsDisplayer _buildingsDisplayer;
         private BuildingCollisionDetector _buildingCollisionDetector;
+        private BuildingByTypeSpawner _buildingByTypeSpawner;
 
         private MapLayerMatrixManager _mapLayerMatrixManager;
         private MapLayerMatrix _mapLayerMatrixWallsEditor;
@@ -36,6 +38,7 @@ namespace Buildings.Application
             BuildingList buildingList,
             BuildingsDisplayer buildingsDisplayer,
             BuildingCollisionDetector buildingCollisionDetector,
+            BuildingByTypeSpawner buildingByTypeSpawner,
             MapLayerMatrixManager mapLayerMatrixManager,
             MapLayerMatrix mapLayerMatrixWallsEditor
         )
@@ -46,6 +49,7 @@ namespace Buildings.Application
             _buildingList = buildingList;
             _buildingsDisplayer = buildingsDisplayer;
             _buildingCollisionDetector = buildingCollisionDetector;
+            _buildingByTypeSpawner = buildingByTypeSpawner;
 
             _mapLayerMatrixManager = mapLayerMatrixManager;
             _mapLayerMatrixWallsEditor = mapLayerMatrixWallsEditor;
@@ -255,12 +259,7 @@ namespace Buildings.Application
                     continue;
                 }
 
-                if (building.Position == Vector3.zero)
-                {
-                    continue;
-                }
-                
-                //todo: place building
+                _buildingByTypeSpawner.Spawn(building.BuildingType, building.Position, building.Rotation);
             }
             
             RemoveObject(_buildingList.BuildingsEditorPreview);
@@ -444,8 +443,7 @@ namespace Buildings.Application
         {
             if (BuildingPreview.BuildingType == BuildingType.Wall)
             {
-                sbyte value = (sbyte) _mapLayerMatrixManager.Get(_mapLayerMatrixWallsEditor,
-                    (short) BuildingPreview.Position2D.x, (short) BuildingPreview.Position2D.y);
+                sbyte value = (sbyte) _mapLayerMatrixManager.Get(_mapLayerMatrixWallsEditor, (short) BuildingPreview.Position2D.x, (short) BuildingPreview.Position2D.y);
 
                 if (value > 0)
                 {
@@ -460,8 +458,7 @@ namespace Buildings.Application
 
             if (BuildingPreview.BuildingType == BuildingType.Wall)
             {
-                _mapLayerMatrixManager.Add(_mapLayerMatrixWallsEditor, (short) BuildingPreview.Position2D.x,
-                    (short) BuildingPreview.Position2D.y, 0);
+                _mapLayerMatrixManager.Add(_mapLayerMatrixWallsEditor, (short) BuildingPreview.Position2D.x, (short) BuildingPreview.Position2D.y, 0);
             }
 
             UpdatePositionAndRotation(BuildingPreview);
