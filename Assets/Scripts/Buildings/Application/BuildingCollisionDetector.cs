@@ -30,7 +30,7 @@ namespace Buildings.Application
         public bool IsColliding(IBuilding building)
         {
             var buildingArea = _buildingAreaGetter.Get(building);
-
+            
             for (int x = buildingArea.MinX; x < buildingArea.MaxX; x++)
             {
                 for (int y = buildingArea.MinY; y < buildingArea.MaxY; y++)
