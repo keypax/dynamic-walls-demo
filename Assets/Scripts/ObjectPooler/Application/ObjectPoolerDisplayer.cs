@@ -13,7 +13,7 @@ namespace ObjectPooler.Application
      */
     public class ObjectPoolerDisplayer : MonoBehaviour
     {
-        public int margin = 100;
+        public int margin = 200;
         
         private TerrainPositionsFromCameraBoundariesGetter _terrainPositionsFromCameraBoundariesGetter;
         
