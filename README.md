@@ -4,6 +4,7 @@
 
 ## In-game example
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/uC5QpEmV8FY/0.jpg)](https://www.youtube.com/watch?v=uC5QpEmV8FY)
+
 (click to open)
 
 # About this repository
@@ -30,6 +31,7 @@ It may be scary, but don't worry and take a look :)
 Good places to start understanding the code are:
 
 Prefab:
+
 `Assets/Prefabs/Buildings/Wall.prefab`
 
 Code:
