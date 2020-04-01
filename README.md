@@ -17,7 +17,7 @@ This project also uses techniques of Object Pooling and custom Frustum Culling, 
 ## How it works
 The idea behind it is very simple. Wall has 4 separate sides (front, right, back, left). If another wall is in front, disable the front side. The same for the second wall. If something is on the back of the wall: disable the back wall. Randomize a little for the prettier look and that's all ;)
 
-[![IMAGE ALT TEXT HERE](https://i.imgur.com/E5QLnWY.png)]
+![IMAGE ALT TEXT HERE](https://i.imgur.com/E5QLnWY.png)
 
 ## Requirements
 
