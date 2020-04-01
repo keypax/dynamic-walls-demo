@@ -28,6 +28,9 @@ It may be scary, but don't worry and take a look :)
 ## Where to start
 Good places to start understanding the code are:
 
+Prefab: `Assets/Prefabs/Buildings/Wall.prefab`
+
+Code:
 `Buildings.Application.WallConfigurator`
 
 `Buildings.Application.WallSidesUpdater`
