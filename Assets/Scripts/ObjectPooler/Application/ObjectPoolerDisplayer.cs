@@ -31,7 +31,7 @@ namespace ObjectPooler.Application
             _displayers.Add(buildingsDisplayer);
         }
 
-        public void Update()
+        public void LateUpdate()
         {
             var terrainPositions = _terrainPositionsFromCameraBoundariesGetter.Get(margin);
 

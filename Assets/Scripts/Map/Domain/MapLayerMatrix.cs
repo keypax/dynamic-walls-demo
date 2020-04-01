@@ -1,5 +1,9 @@
 ﻿namespace Map.Domain
 {
+    /**
+     * Two-dimensional matrix (imagine it as such a large chessboard) where we store various types of data (e.g. where are buildings, trees, forest, etc.).
+     * We can easily create any matrix layer and later check in the code "if there is a forest in this place, but there is no tree, move the unit to this position.
+     */
     public class MapLayerMatrix
     {
         public short Width { get; }

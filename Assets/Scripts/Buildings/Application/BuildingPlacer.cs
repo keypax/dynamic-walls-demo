@@ -11,6 +11,11 @@ using Random = UnityEngine.Random;
 
 namespace Buildings.Application
 {
+    /**
+     * There's a lot going on here.
+     * This is the main class that is responsible for arranging the building on the map.
+     * Detailed comments below
+     */
     public class BuildingPlacer
     {
         public BuildingTypeData BuildingTypeData { get; set; }

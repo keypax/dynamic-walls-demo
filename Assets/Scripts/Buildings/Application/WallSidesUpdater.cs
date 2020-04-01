@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Buildings.Application
 {
+    /**
+     * It decides whether to turn on / off a wall sides depending on the other walls it comes into contact with.
+     */
     public class WallSidesUpdater
     {
         private MapLayerMatrixManager _mapLayerMatrixManager;

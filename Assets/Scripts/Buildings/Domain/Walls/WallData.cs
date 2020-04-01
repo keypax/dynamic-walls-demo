@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Buildings.Domain.Walls
 {
+    /**
+     * Extracts the necessary data from the wall configurator and keeps them in this place so as not to waste memory
+     */
     public class WallData : MonoBehaviour
     {
         public WallConfigurator wallConfigurator;

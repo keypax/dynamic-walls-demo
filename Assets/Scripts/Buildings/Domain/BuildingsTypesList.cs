@@ -5,6 +5,11 @@ using UnityEngine;
 
 namespace Buildings.Domain
 {
+    /**
+     * List of all building types.
+     * It's the "prefabs" array we throw in every building. The script automatically extracts all necessary data and stores it in "BuildingTypeData".
+     * When we need data for a given type of building, we extract it using "GetByType"
+     */
     public class BuildingsTypesList : MonoBehaviour
     {
         public GameObject[] prefabs;

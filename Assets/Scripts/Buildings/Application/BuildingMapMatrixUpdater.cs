@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Buildings.Application
 {
+    /**
+     * Updates the 2D matrix indicating where the building is
+     */
     public class BuildingMapMatrixUpdater
     {
         private BuildingAreaGetter _buildingAreaGetter;

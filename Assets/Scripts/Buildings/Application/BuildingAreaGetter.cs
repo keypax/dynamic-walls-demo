@@ -3,6 +3,9 @@ using Buildings.Domain;
 
 namespace Buildings.Application
 {
+    /**
+     * Prepares and returns data about building position.
+     */
     public class BuildingAreaGetter
     {
         private BuildingsTypesList _buildingsTypesList;

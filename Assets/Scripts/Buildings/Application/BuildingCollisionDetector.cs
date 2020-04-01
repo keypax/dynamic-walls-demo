@@ -1,10 +1,12 @@
 ﻿using Buildings.Domain;
 using Map.Application;
 using Map.Domain;
-using UnityEngine;
 
 namespace Buildings.Application
 {
+    /**
+     * Detects if building on specific position is colliding with some obstacle
+     */
     public class BuildingCollisionDetector
     {
         private BuildingAreaGetter _buildingAreaGetter;
