@@ -14,6 +14,11 @@ This demo project showcases dynamic walls whose sides adapt to the environment u
 It contains a working example scene and commented source code.
 This project also uses techniques of Object Pooling and custom Frustum Culling, which can be viewed here: (https://github.com/keypax/object-pooling-in-unity-demo)
 
+## How it works
+The idea behind it is very simple. Wall has 4 separate sides (front, right, back, left). If another wall is in front, disable the front side. The same for the second wall. If something is on the back of the wall: disable the back wall. Randomize a little for the prettier look and that's all ;)
+
+[![IMAGE ALT TEXT HERE](https://i.imgur.com/E5QLnWY.png)]
+
 ## Requirements
 
 Unity 2019.3.2: go to [Unity download archive](https://unity3d.com/get-unity/download/archive) page and download **Unity 2019.3.2** version.
