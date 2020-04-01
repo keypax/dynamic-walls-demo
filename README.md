@@ -1,26 +1,16 @@
-# What is Object Pooling?
-Object Pooling is an optimization technique that focuses on reusing objects instead of creating and destroying them. In this solution objects are only displayed if they are inside camera view and released after being outside.
-
-[More info + example](https://www.youtube.com/watch?v=tdSmKaJvCoA)
-
+## Dynamic Walls - demo implementation
  
-![Alt Text](https://media2.giphy.com/media/lQbFj9l7T2lAuyTWjM/giphy.gif)
+![Alt Text](https://media.giphy.com/media/IhrybqUpXDkMTgRgO6/giphy.gif)
 
-[https://www.youtube.com/watch?v=vGq9RtnU9tg](https://www.youtube.com/watch?v=vGq9RtnU9tg)
-
-## Real life example
-In our game we have created a lot of GameObjects (trees, rocks, buildings). Even with built-in Frustum Culling there was a big drop in game performance. After some investigation we figured out that Unity has a problem even with empty GameObjects if they number in hundreds of thousands. 
-
-Object Pooling gave us **3x more FPS than before** (from 40 to 120).
-
+## In-game example
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/uC5QpEmV8FY/0.jpg)](https://www.youtube.com/watch?v=uC5QpEmV8FY)
 
 # About this repository
-This demo project showcases a custom implementation of Object Pooling used in our upcoming game: 
-
+This demo project showcases dynamic walls whose sides adapt to the environment used in our upcoming game: 
 [Pelagos: Rise of Greece](https://www.reddit.com/r/Pelagos/).
 
 It contains a working example scene and commented source code.
-
+This project also uses techniques of Object Pooling and custom Frustum Culling, which can be viewed here: (https://github.com/keypax/object-pooling-in-unity-demo)
 
 ## Requirements
 
@@ -31,7 +21,6 @@ Just download ZIP of this repo or use GIT client and open in Unity. That's all :
 ## Implementation
 
 This is a demonstration of a solution that we're using in our project. **This is not** an out of the box plugin that you can download and make work in 2 minutes.
-Object Pooling requires specific code architecture approach that is unfortunately not taught on Unity tutorials.
 In this example we're using **Dependency Injection**. We also try to use Unity components only if necessary.
 
 It may be scary, but don't worry and take a look :)
@@ -39,25 +28,10 @@ It may be scary, but don't worry and take a look :)
 ## Where to start
 Good places to start understanding the code are:
 
-`ObjectPooler.Application.ObjectPoolerDisplayer`
+`Buildings.Application.WallConfigurator`
 
-`ObjectPooler.Application.Displayers.BuildingsDisplayer`
+`Buildings.Application.WallSidesUpdater`
 
-`ObjectPooler.Application.Displayers.PeopleDisplayer`
+`Buildings.Application.Spawners.WallSpawner`
 
-and
 
-`Map.Application.MapGenerator`
-
-# Benchmark
-Buildings: 22064
-
-People: 16914
-
-|  Object Pooling ON|Object Pooling OFF  |
-|--|--|
-|  148 FPS| 30 FPS |
-
-Click on screenshot to resize
-![Object Pooling ON](https://i.imgur.com/eeLE7Du.png)
-![Object Pooling OFF](https://i.imgur.com/lKphxcR.png)
