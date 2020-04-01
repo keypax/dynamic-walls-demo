@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Buildings.Application
 {
+    /**
+     * Configuration data regarding the wall and its behavior.
+     * Enables / disables all sides here depending on the data in IWall
+     */
     public class WallConfigurator : MonoBehaviour
     {
         public GameObject[] bases;

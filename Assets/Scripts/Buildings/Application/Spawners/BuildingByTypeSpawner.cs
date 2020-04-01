@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Buildings.Application.Spawners
 {
+    /**
+     * Helper class that decide which spawner will need to be used to spawn the building on specific type
+     */
     public class BuildingByTypeSpawner
     {
         private WallSpawner _wallSpawner;

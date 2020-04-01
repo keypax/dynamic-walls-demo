@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Buildings.Domain
 {
+    /**
+     * Main parent for all the buildings. It contains all common data which evey building has.
+     */
     public interface IBuilding
     {
         Guid Guid { get; set; }

@@ -3,6 +3,9 @@ using Map.Domain;
 
 namespace Map.Application
 {
+    /**
+     * Doing operations on the matrix. One code that can be used for any matrix.
+     */
     public class MapLayerMatrixManager
     {
         public void Add(MapLayerMatrix mapLayerMatrix, short pointX, short pointY, byte radius, sbyte forcedValue = -1)

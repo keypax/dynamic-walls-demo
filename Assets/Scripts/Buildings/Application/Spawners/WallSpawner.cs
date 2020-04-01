@@ -8,8 +8,15 @@ using Random = UnityEngine.Random;
 
 namespace Buildings.Application.Spawners
 {
+    /**
+     * Wall spawner.
+     * GetIndex() randomize wall sides. This ensures that wall will look always the same.
+     * Disclaimer: in this example repeated side (which appears every two fields) has fixed index in array (RepeatedPaternIndexSide)
+     */
     public class WallSpawner : BuildingSpawner
     {
+        private const byte RepeatedPaternIndexSide = 1;
+        
         private WallData _wallData;
         private MapLayerMatrixManager _mapLayerMatrixManager;
         private MapLayerMatrix _mapLayerMatrixWalls;
@@ -65,14 +72,14 @@ namespace Buildings.Application.Spawners
             {
                 if (x % 2 == 0)
                 {
-                    return 1;
+                    return RepeatedPaternIndexSide;
                 }
             }
             else
             {
                 if ((x+1) % 2 == 0)
                 {
-                    return 1;
+                    return RepeatedPaternIndexSide;
                 }
             }
 

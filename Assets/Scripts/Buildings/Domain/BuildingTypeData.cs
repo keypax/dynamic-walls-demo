@@ -1,5 +1,9 @@
 ﻿namespace Buildings.Domain
 {
+    /**
+     * Data for a given type of building. It's size, building of a given type can be rotated etc.
+     * I do not want to store this information in IBuilding because it is always the same and there is no point in wasting memory
+     */
     public class BuildingTypeData
     {
         public BuildingType BuildingType { get; }

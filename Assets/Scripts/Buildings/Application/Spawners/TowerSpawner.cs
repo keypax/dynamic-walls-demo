@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Buildings.Application.Spawners
 {
+    /**
+     * Spawns a tower.. what did you think? :D
+     */
     public class TowerSpawner : BuildingSpawner
     {
         public TowerSpawner(

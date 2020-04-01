@@ -5,6 +5,12 @@ using UnityEngine;
 
 namespace Buildings.Application.Spawners
 {
+    /**
+     * Parent for all spawners. It contains all the common code.
+     * All buildings need to be:
+     *  - added to building list
+     *  - added to 2D building matrix
+     */
     public abstract class BuildingSpawner
     {
         private BuildingList _buildingList;
