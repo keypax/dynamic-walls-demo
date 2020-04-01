@@ -4,6 +4,7 @@
 
 ## In-game example
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/uC5QpEmV8FY/0.jpg)](https://www.youtube.com/watch?v=uC5QpEmV8FY)
+(click to open)
 
 # About this repository
 This demo project showcases dynamic walls whose sides adapt to the environment used in our upcoming game: 
@@ -28,9 +29,11 @@ It may be scary, but don't worry and take a look :)
 ## Where to start
 Good places to start understanding the code are:
 
-Prefab: `Assets/Prefabs/Buildings/Wall.prefab`
+Prefab:
+`Assets/Prefabs/Buildings/Wall.prefab`
 
 Code:
+
 `Buildings.Application.WallConfigurator`
 
 `Buildings.Application.WallSidesUpdater`
