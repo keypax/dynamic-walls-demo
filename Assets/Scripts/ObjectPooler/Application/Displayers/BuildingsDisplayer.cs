@@ -12,7 +12,7 @@ namespace ObjectPooler.Application.Displayers
      *
      * Buildings are static (not moveable) so there's no point to run this code if camera is on the same position as in last frame
      *
-     * Adding component "BuildingObjectPoolingComponent" to "Building" object inform script that building is already displayed.
+     * Adding component "BuildingController" to "Building" object inform script that building is already displayed.
      */
     public class BuildingsDisplayer : AObjectPoolerDisplayer
     {
@@ -62,10 +62,10 @@ namespace ObjectPooler.Application.Displayers
                 building.BuildingConfigurator = null;
             }
             
-            /*if (building is IWall wall)
+            if (building is IWall wall)
             {
                 wall.WallConfigurator = null;
-            }*/
+            }
         }
 
         private void DisplayOne(IBuilding building, TerrainPositionsFromCameraBoundaries terrainPositions)
@@ -96,6 +96,7 @@ namespace ObjectPooler.Application.Displayers
                 {
                     if (building is IWall wall)
                     {
+                        //it can be enabled to make code more efficient
                         //if (_mapLayersLastUpdate != _wallSidesUpdater.GetLayersLastChangedDate())
                         {
                             _wallSidesUpdater.Update(wall);

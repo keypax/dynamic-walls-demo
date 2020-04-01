@@ -18,7 +18,9 @@ namespace Buildings.Application
      */
     public class BuildingPlacer
     {
+        //data about building type (size/disabled rotation etc.)
         public BuildingTypeData BuildingTypeData { get; set; }
+        //building instance that we're currently previewing
         public IBuilding BuildingPreview { get; set; }
         
         private BuildingFromSpawnerGetter _buildingFromSpawnerGetter;
@@ -62,6 +64,7 @@ namespace Buildings.Application
 
         public void Preview()
         {
+            //create new building instance 
             if (BuildingPreview == null && BuildingTypeData != null)
             {
                 BuildingPreview = CreateNewObject();
@@ -81,6 +84,7 @@ namespace Buildings.Application
                 _dragStartingPosition = GetTerrainHitPoint(BuildingPreview);
             }
 
+            //dragging
             if (Input.GetMouseButton(0))
             {
                 Vector3 hitPoint = GetTerrainHitPoint(BuildingPreview);
@@ -93,6 +97,8 @@ namespace Buildings.Application
                 int buildingsRowsX = GetBuildingsRowX(difference, GetLength(BuildingPreview));
                 int buildingsRowsY = GetBuildingsRowY(difference, GetHeight(BuildingPreview));
                 
+                //we store here which building are already in the editor.
+                //that helps us to remove buildings that on the end of code will be not actual anymore
                 _buildingList.BuildingsEditorCreatedBefore = new List<IBuilding>(_buildingList.BuildingsEditor);
 
                 UpdateDragDirection(buildingsRowsX, buildingsRowsY);
@@ -101,7 +107,7 @@ namespace Buildings.Application
                 {
                     for (int y = 0; y <= buildingsRowsY; y++)
                     {
-                        //i know... i'm lazy
+                        //different placing behaviour for walls. I know... i'm lazy. It can be made a lot better
                         if (BuildingPreview.BuildingType == BuildingType.Wall)
                         {
                             if (_dragDirection == 0)
@@ -150,6 +156,7 @@ namespace Buildings.Application
                             newZ
                         );
                         
+                        //there is no other building in editor on this position, we can create new 
                         if (!ObjectOnPositionExists(position))
                         {
                             AddObject(position);
@@ -157,6 +164,7 @@ namespace Buildings.Application
                     }
                 }
 
+                //remove difference between start and end of the code. Buildings that are not actual anymore will be removed
                 foreach (IBuilding building in _buildingList.BuildingsEditorCreatedBefore)
                 {
                     RemoveObject(building);
@@ -171,6 +179,9 @@ namespace Buildings.Application
             UpdatePositionsAndRotations();
         }
         
+        /**
+         * Rotates building. There are only 4 directions (0, 1, 2, 3)
+         */
         public void Rotate(bool reverse = false)
         {
             if (BuildingTypeData.DisableRotation)
@@ -205,6 +216,9 @@ namespace Buildings.Application
             SetRotationForAll();
         }
 
+        /**
+         * Clean the editor
+         */
         public void Unset()
         {
             BuildingTypeData = null;
@@ -226,13 +240,14 @@ namespace Buildings.Application
             _buildingList.BuildingsEditor.Clear();
             _buildingList.BuildingsEditorCreatedBefore.Clear();
         }
-
+        
         private void AddObject(Vector3 position)
         {
             IBuilding building = CreateNewObject();
             building.Position = position;
             building.Position2D = new Vector2(building.Position.x, building.Position.z);
             
+            //it can be done better. This is temporary information about wall position in the editor
             if (BuildingPreview.BuildingType == BuildingType.Wall)
             { 
                 _mapLayerMatrixManager.Add(_mapLayerMatrixWallsEditor, (short) building.Position2D.x, (short) building.Position2D.y, 0);
@@ -253,6 +268,9 @@ namespace Buildings.Application
             _buildingsDisplayer.ReleaseFromPool(building);
         }
 
+        /**
+         * Spawns buildings from editor to map
+         */
         private void Place()
         {
             foreach (IBuilding building in _buildingList.BuildingsEditor.ToList())
