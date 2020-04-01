@@ -42,4 +42,6 @@ Code:
 
 `Buildings.Application.Spawners.WallSpawner`
 
+`ObjectPooler.Application.Displayers.BuildingsDisplayer`
+
 
